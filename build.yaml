@@ -23,6 +23,11 @@ include:
     shield: hydra_left
   - board: nice_nano//zmk
     shield: hydra_right
+#Enable Firmware Reset
+# 
+  - board: nice_nano//zmk 
+    shield: settings_reset
+# 
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
 
