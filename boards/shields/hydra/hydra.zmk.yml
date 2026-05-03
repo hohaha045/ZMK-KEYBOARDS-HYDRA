@@ -1,0 +1,14 @@
+file_format: "1"
+id: hydra
+name: Hydra
+type: shield
+url: https://github.com/hohaha045/zmk-keyboards-daedalus-test
+requires: [pro_micro]
+features:
+  - keys
+  - encoder
+  - studio
+  - pointer
+siblings:
+  - hydra_left
+  - hydra_right

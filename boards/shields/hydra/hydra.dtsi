@@ -1,0 +1,71 @@
+#include <dt-bindings/zmk/matrix_transform.h>
+#include <dt-bindings/zmk/behaviors.h>
+#include "hydra-layouts.dtsi"
+
+&physical_layout0 {
+    transform = <&default_transform>;
+};
+
+/ {
+    chosen {
+        zmk,kscan = &kscan0;
+        zmk,physical-layout = &physical_layout0;
+    };
+
+    default_transform: keymap_transform_0 {
+        compatible = "zmk,matrix-transform";
+        columns = <10>;
+        rows = <4>;
+
+            // | SW3  | SW6  | SW9  | SW12 | SW15 |                     | SW33 | SW30 | SW27 | SW24 | SW21 |
+            // | SW2  | SW5  | SW8  | SW11 | SW14 |                     | SW32 | SW29 | SW26 | SW23 | SW20 |
+            // | SW1  | SW4  | SW7  | SW10 | SW13 |                     | SW31 | SW28 | SW25 | SW22 | SW19 |
+            // | SW16 | SW17 | SW18 |                                                 | SW36 | SW35 | SW34 |
+
+        map = <
+            RC(0,0) RC(0,1) RC(0,2) RC(0,3) RC(0,4)                 RC(0,5) RC(0,6) RC(0,7) RC(0,8) RC(0,9)
+            RC(1,0) RC(1,1) RC(1,2) RC(1,3) RC(1,4)                 RC(1,5) RC(1,6) RC(1,7) RC(1,8) RC(1,9)
+            RC(2,0) RC(2,1) RC(2,2) RC(2,3) RC(2,4)                 RC(2,5) RC(2,6) RC(2,7) RC(2,8) RC(2,9)
+            RC(3,0) RC(3,1) RC(3,2)                                                 RC(3,7) RC(3,8) RC(3,9)
+        >;
+    };
+
+    kscan0: kscan {
+        compatible = "zmk,kscan-gpio-matrix";
+        wakeup-source;
+        diode-direction = "col2row";
+        row-gpios
+            = <&pro_micro 21 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // TOP
+            , <&pro_micro 20 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // HOME
+            , <&pro_micro 19 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // BOTTOM
+            , <&pro_micro 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // THUMB
+            ;
+    };
+
+    behaviors {
+        htp: hold_tap_preferred {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <500>;
+            bindings = <&kp>, <&kp>;
+            display-name = "Tap preffered hold-tap";
+        };
+    };
+
+    left_encoder: encoder_left {
+        label = "LEFT_ENCODER";
+        compatible = "alps,ec11";
+        a-gpios = <&pro_micro 0 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>; // Pin A
+        b-gpios = <&pro_micro 1 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>; // Pin B
+        steps = <20>;
+        status = "disabled";
+    };
+
+    sensors {
+        compatible = "zmk,keymap-sensors";
+        sensors = <&left_encoder>;
+        triggers-per-rotation = <20>;
+    };
+
+};

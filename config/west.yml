@@ -1,0 +1,31 @@
+manifest:
+  remotes:
+    - name: zmkfirmware
+      url-base: https://github.com/zmkfirmware
+    # -------------------------------------------------------------------------
+    # HOW TO REVERT TO UPSTREAM PMW3610 (badjeff's external module)
+    # -------------------------------------------------------------------------
+    # Step 1: In this file (config/west.yml), under "remotes:" below,
+    #         uncomment the two "badjeff" lines (remove the leading "# ")
+    # Step 2: In this file (config/west.yml), under "projects:" below,
+    #         uncomment the three "zmk-pmw3610-driver" lines (remove the "# ")
+    # Step 3: Delete the entire drivers/pmw3610/ folder from the repo root
+    # Step 4: Delete CMakeLists.txt from the repo root
+    # Step 5: Delete Kconfig from the repo root
+    # Step 6: Open zephyr/module.yml — delete the top active block and
+    #         uncomment the "ORIGINAL" block at the bottom of that file
+    # -------------------------------------------------------------------------
+    # - name: badjeff
+    #   url-base: https://github.com/badjeff
+    # Additional modules containing boards/shields/custom code can be listed here as well
+    # See https://docs.zephyrproject.org/3.2.0/develop/west/manifest.html#projects
+  projects:
+    - name: zmk
+      remote: zmkfirmware
+      revision: main
+      import: app/west.yml
+    # - name: zmk-pmw3610-driver
+    #   remote: badjeff
+    #   revision: main
+  self:
+    path: config

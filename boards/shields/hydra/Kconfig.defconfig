@@ -1,0 +1,32 @@
+if SHIELD_HYDRA_LEFT
+
+config ZMK_POINTING
+    default y
+
+config I2C
+    default y
+
+endif
+
+if SHIELD_HYDRA_RIGHT
+
+config ZMK_KEYBOARD_NAME
+    default "Hydra"
+
+config ZMK_SPLIT_ROLE_CENTRAL
+    default y
+
+config ZMK_POINTING
+    default y
+
+config SPI
+    default y
+
+endif
+
+if SHIELD_HYDRA_RIGHT || SHIELD_HYDRA_LEFT
+
+config ZMK_SPLIT
+    default y
+
+endif

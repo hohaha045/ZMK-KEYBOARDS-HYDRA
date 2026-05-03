@@ -1,0 +1,21 @@
+# -------------------------------------------------------------------------
+# CURRENT: standalone (inline PMW3610 driver, no external dependencies)
+# cmake/kconfig/dts_root expose the inline driver to the ZMK build system.
+# -------------------------------------------------------------------------
+name: zmk-keyboards-hydra
+build:
+  cmake: .
+  kconfig: Kconfig
+  settings:
+    board_root: .
+    dts_root: .
+
+# -------------------------------------------------------------------------
+# ORIGINAL: minimal version (used when PMW3610 comes from badjeff's module)
+# To revert: delete the block above and uncomment the block below.
+# Also see the revert instructions in config/west.yml.
+# -------------------------------------------------------------------------
+# name: zmk-keyboards-hydra
+# build:
+#   settings:
+#     board_root: .
