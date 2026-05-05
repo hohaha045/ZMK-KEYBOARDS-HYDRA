@@ -2,11 +2,11 @@
 
 &kscan0 {
     col-gpios
-        = <&pro_micro 18 GPIO_ACTIVE_HIGH> // PINKY
-        , <&pro_micro 15 GPIO_ACTIVE_HIGH> // RING
-        , <&pro_micro 14 GPIO_ACTIVE_HIGH> // MIDDLE
-        , <&pro_micro 16 GPIO_ACTIVE_HIGH> // INDEX
-        , <&pro_micro 10 GPIO_ACTIVE_HIGH> // INNER
+        = <&pro_micro 18 GPIO_ACTIVE_HIGH> // needed edit
+        , <&pro_micro 15 GPIO_ACTIVE_HIGH> // needed edit
+        , <&pro_micro 14 GPIO_ACTIVE_HIGH> // needed edit
+        , <&pro_micro 16 GPIO_ACTIVE_HIGH> // needed edit
+        , <&pro_micro 10 GPIO_ACTIVE_HIGH> // needed edit
         ;
 };
 
@@ -15,15 +15,15 @@
 &pinctrl {
     i2c0_default: i2c0_default {
         group1 {
-            psels = <NRF_PSEL(TWIM_SDA, 1, 04)>,
-                <NRF_PSEL(TWIM_SCL, 0, 11)>;
+            psels = <NRF_PSEL(TWIM_SDA, 0, 11)>, // D7 SDAT
+                <NRF_PSEL(TWIM_SCL, 1, 00)>; // D6 SCLT
             bias-pull-up;
         };
     };
     i2c0_sleep: i2c0_sleep {
         group1 {
-            psels = <NRF_PSEL(TWIM_SDA, 1, 04)>,
-                <NRF_PSEL(TWIM_SCL, 0, 11)>;
+            psels = <NRF_PSEL(TWIM_SDA, 0, 11)>, // D7 SDAT
+                <NRF_PSEL(TWIM_SCL, 1, 10)>; // D6 SCLT
             low-power-enable;
         };
     };
@@ -35,7 +35,7 @@
         compatible = "cirque,pinnacle";
         status = "okay";
         reg = <0x2a>;
-        data-ready-gpios = <&pro_micro 6 (GPIO_ACTIVE_HIGH)>;
+        data-ready-gpios = <&pro_micro 5 (GPIO_ACTIVE_HIGH)>; // D5 DRT
         idle-packets-count = <0>;
         sensitivity = "4x";
         primary-tap-enable;
