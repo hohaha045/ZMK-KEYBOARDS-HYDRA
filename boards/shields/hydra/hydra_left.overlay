@@ -2,11 +2,11 @@
 
 &kscan0 {
     col-gpios
-        = <&pro_micro 18 GPIO_ACTIVE_HIGH> // needed edit
-        , <&pro_micro 15 GPIO_ACTIVE_HIGH> // needed edit
-        , <&pro_micro 14 GPIO_ACTIVE_HIGH> // needed edit
-        , <&pro_micro 16 GPIO_ACTIVE_HIGH> // needed edit
-        , <&pro_micro 10 GPIO_ACTIVE_HIGH> // needed edit
+        = <&pro_micro 14 GPIO_ACTIVE_HIGH> // COL1 D14
+        , <&pro_micro 16 GPIO_ACTIVE_HIGH> // COL2 D16
+        , <&pro_micro 10 GPIO_ACTIVE_HIGH> // COL3 D10
+        , <&pro_micro 16 GPIO_ACTIVE_HIGH> // COL4 TBD
+        , <&pro_micro 10 GPIO_ACTIVE_HIGH> // COL5 TBD
         ;
 };
 
@@ -23,7 +23,7 @@
     i2c0_sleep: i2c0_sleep {
         group1 {
             psels = <NRF_PSEL(TWIM_SDA, 0, 11)>, // D7 SDAT
-                <NRF_PSEL(TWIM_SCL, 1, 10)>; // D6 SCLT
+                <NRF_PSEL(TWIM_SCL, 1, 00)>; // D6 SCLT
             low-power-enable;
         };
     };
