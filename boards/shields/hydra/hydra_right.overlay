@@ -1,15 +1,21 @@
 #include "hydra.dtsi"
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 
-&default_transform { col-offset = <5>; };
+&default_transform { col-offset = <3>; };
 
-&kscan0 {
+&kscan_col2row {
     col-gpios
         = <&pro_micro 14 GPIO_ACTIVE_HIGH> // COL1 D14
         , <&pro_micro 16 GPIO_ACTIVE_HIGH> // COL2 D16
         , <&pro_micro 10 GPIO_ACTIVE_HIGH> // COL3 D10
-        , <&pro_micro 16 GPIO_ACTIVE_HIGH> // COL4 TBD
-        , <&pro_micro 10 GPIO_ACTIVE_HIGH> // COL5 TBD
+        ;
+};
+
+&kscan_row2col {
+    col-gpios
+        = <&pro_micro 14 GPIO_ACTIVE_HIGH> // COL1 D14
+        , <&pro_micro 16 GPIO_ACTIVE_HIGH> // COL2 D16
+        , <&pro_micro 10 GPIO_ACTIVE_HIGH> // COL3 D10
         ;
 };
 

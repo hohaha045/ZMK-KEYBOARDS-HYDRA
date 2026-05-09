@@ -1,12 +1,18 @@
 #include "hydra.dtsi"
 
-&kscan0 {
+&kscan_col2row {
     col-gpios
         = <&pro_micro 14 GPIO_ACTIVE_HIGH> // COL1 D14
         , <&pro_micro 16 GPIO_ACTIVE_HIGH> // COL2 D16
         , <&pro_micro 10 GPIO_ACTIVE_HIGH> // COL3 D10
-        , <&pro_micro 16 GPIO_ACTIVE_HIGH> // COL4 TBD
-        , <&pro_micro 10 GPIO_ACTIVE_HIGH> // COL5 TBD
+        ;
+};
+
+&kscan_row2col {
+    col-gpios
+        = <&pro_micro 14 GPIO_ACTIVE_HIGH> // COL1 D14
+        , <&pro_micro 16 GPIO_ACTIVE_HIGH> // COL2 D16
+        , <&pro_micro 10 GPIO_ACTIVE_HIGH> // COL3 D10
         ;
 };
 
