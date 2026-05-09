@@ -13,9 +13,9 @@
 
 &kscan_row2col {
     col-gpios
-        = <&pro_micro 14 GPIO_ACTIVE_HIGH> // COL1 D14
-        , <&pro_micro 16 GPIO_ACTIVE_HIGH> // COL2 D16
-        , <&pro_micro 10 GPIO_ACTIVE_HIGH> // COL3 D10
+        = <&pro_micro 14 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // COL1 D14 - INPUT
+        , <&pro_micro 16 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // COL2 D16 - INPUT
+        , <&pro_micro 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // COL3 D10 - INPUT
         ;
 };
 

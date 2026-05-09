@@ -28,13 +28,13 @@
 | Q | W | F | P | B |  | J | L | U | Y | ' |
 | A | R | S | T | G |  | M | N | E | I | O |
 | X | C | V | D | Z |  | K | H | , | . | / |
-        |DEL|BSP|TAB|  |ENT|SPC|ESC|
-        (MED|NAV|   )  (SYM|NUM|FNC)
+        |DEL|BSP|TAB| _ | _ |  | _ | _ |ENT|SPC|ESC|
+        (MED|NAV|   )           (SYM|NUM|FNC)
 ---------------------------------------------*/
 &kp Q          &kp W          &kp F              &kp P            &kp B              &kp J          &kp L             &kp U               &kp Y           &kp APOSTROPHE
 &htp LEFT_GUI A &htp LEFT_ALT R &htp LEFT_CONTROL S &htp LEFT_SHIFT T &kp G              &kp M          &htp RIGHT_SHIFT N &htp RIGHT_CONTROL E &htp RIGHT_ALT I &htp RIGHT_GUI O
 &kp X          &kp C          &kp V              &kp D            &kp Z              &kp K          &kp H             &kp COMMA           &kp DOT         &kp FSLH
-                              &lt 2 DEL          &lt 1 BSPC       &kp TAB            &lt 4 ENTER    &lt 3 SPACE       &lt 5 ESC
+                              &lt 2 DEL          &lt 1 BSPC       &kp TAB   &trans &trans   &lt 4 ENTER    &lt 3 SPACE       &lt 5 ESC  &trans &trans
                 >;
                 /*Binding for the encoder*/
                 sensor-bindings = <&inc_dec_kp K_VOL_UP K_VOL_DN>;
@@ -51,7 +51,7 @@
 &trans       &trans       &trans           &trans         &trans        &kp K_REDO   &kp K_PASTE    &kp K_COPY     &kp K_CUT     &kp K_UNDO
 &kp LEFT_GUI &kp LEFT_ALT &kp LEFT_CONTROL &kp LEFT_SHIFT &trans        &kp CAPSLOCK &kp LEFT_ARROW &kp DOWN_ARROW &kp UP_ARROW  &kp RIGHT_ARROW
 &trans       &trans       &trans           &trans         &trans        &kp INSERT   &kp HOME       &kp PAGE_DOWN  &kp PAGE_UP   &kp END
-                          &trans           &trans         &trans        &trans       &trans         &trans
+                          &trans           &trans         &trans   &trans &trans   &trans       &trans         &trans  &trans &trans
                 >;
                 };
                 media {
@@ -65,7 +65,7 @@
 &bootloader    &studio_unlock &bt BT_CLR_ALL   &trans         &sys_reset             &trans     &trans           &trans            &trans          &trans
 &kp LEFT_GUI   &kp LEFT_ALT   &kp LEFT_CONTROL &kp LEFT_SHIFT &trans                 &trans     &kp K_PREV       &kp K_VOLUME_DOWN &kp K_VOLUME_UP &kp K_NEXT
 &trans         &trans         &trans           &trans         &trans                 &trans     &trans           &trans            &trans          &trans
-                              &trans           &trans         &trans                 &kp C_STOP &kp K_PLAY_PAUSE &kp C_MUTE
+                              &trans           &trans         &trans   &trans &trans           &kp C_STOP &kp K_PLAY_PAUSE &kp C_MUTE  &trans &trans
                 >;
                 };
                 numbers {
@@ -79,7 +79,7 @@
 &kp LEFT_BRACKET &kp N1 &kp N2 &kp N3  &kp RIGHT_BRACKET        &trans &trans          &trans            &trans        &trans
 &kp SEMICOLON    &kp N4 &kp N5  &kp N6 &kp EQUAL                &trans &kp RIGHT_SHIFT &kp RIGHT_CONTROL &kp RIGHT_ALT &kp RIGHT_GUI
 &kp GRAVE        &kp N7 &kp N8  &kp N9 &kp BACKSLASH            &trans &trans          &trans            &trans        &trans
-                        &kp DOT &kp N0 &kp MINUS                &trans &trans          &trans
+                        &kp DOT &kp N0 &kp MINUS  &trans &trans          &trans &trans          &trans  &trans &trans
                 >;
                 };
                 symbols {
@@ -93,7 +93,7 @@
 &kp LEFT_BRACE &kp AMPERSAND   &kp ASTERISK &kp LEFT_PARENTHESIS  &kp RIGHT_BRACE        &trans &trans          &trans            &trans        &trans
 &kp COLON      &kp DOLLAR      &kp PERCENT  &kp CARET             &kp PLUS               &trans &kp RIGHT_SHIFT &kp RIGHT_CONTROL &kp RIGHT_ALT &kp RIGHT_GUI
 &kp TILDE      &kp EXCLAMATION &kp AT_SIGN  &kp HASH              &kp PIPE               &trans &trans          &trans            &trans        &trans
-                       &kp LEFT_PARENTHESIS &kp RIGHT_PARENTHESIS &kp UNDERSCORE         &trans &trans          &trans
+                       &kp LEFT_PARENTHESIS &kp RIGHT_PARENTHESIS &kp UNDERSCORE  &trans &trans       &trans &trans          &trans  &trans &trans
                 >;
                 };
                 functions {
@@ -107,7 +107,7 @@
 &kp F10  &kp F1 &kp F2     &kp F3    &kp PRINTSCREEN         &sys_reset &trans          &bt BT_CLR_ALL    &studio_unlock        &bootloader
 &kp F11  &kp F4 &kp F5     &kp F6    &trans                  &trans     &kp RIGHT_SHIFT &kp RIGHT_CONTROL &kp RIGHT_ALT &kp RIGHT_GUI
 &kp F12  &kp F7 &kp F8     &kp F9    &trans                  &trans     &trans          &trans            &trans        &trans
-                &kp K_MENU &kp SPACE &kp TAB                 &trans     &trans          &trans
+                &kp K_MENU &kp SPACE &kp TAB   &trans &trans              &trans     &trans          &trans  &trans &trans
                 >;
                 };
                 // Extra layers for changes with ZMK Config

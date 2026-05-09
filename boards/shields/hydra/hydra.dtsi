@@ -17,26 +17,22 @@
         columns = <6>;  // 3 physical cols per side
         rows = <8>;     // 4 col2row rows + 4 row2col rows (Japanese Duplex)
 
-            // | SW3  | SW6  | SW9  | SW12 | SW15 |                     | SW33 | SW30 | SW27 | SW24 | SW21 |
-            // | SW2  | SW5  | SW8  | SW11 | SW14 |                     | SW32 | SW29 | SW26 | SW23 | SW20 |
-            // | SW1  | SW4  | SW7  | SW10 | SW13 |                     | SW31 | SW28 | SW25 | SW22 | SW19 |
-            // | SW16 | SW17 | SW18 |                                                 | SW36 | SW35 | SW34 |
-            //
-            // Duplex mapping: odd visual cols (1,3,5) = col2row RC(row,col)
-            //                 even visual cols (2,4)   = row2col RC(row+4,col)
-            //                 thumb row = 3 col2row keys only
+        // Visual layout per row (5 keys: col2row, row2col, col2row, row2col, col2row)
+        // Left cols 0-2, Right cols 3-5 (via col-offset=3 in right overlay)
+        // col2row keys  → RC(row,   col)
+        // row2col keys  → RC(row+4, col)  [row-offset=4 in composite]
 
         map = <
-            // Left side (col-offset = 0)
-            RC(0,0) RC(4,0) RC(0,1) RC(4,1) RC(0,2)
-            RC(1,0) RC(5,0) RC(1,1) RC(5,1) RC(1,2)
-            RC(2,0) RC(6,0) RC(2,1) RC(6,1) RC(2,2)
-            RC(3,0) RC(3,1) RC(3,2)
-            // Right side (col-offset = 3 set in hydra_right.overlay)
-            RC(0,3) RC(4,3) RC(0,4) RC(4,4) RC(0,5)
-            RC(1,3) RC(5,3) RC(1,4) RC(5,4) RC(1,5)
-            RC(2,3) RC(6,3) RC(2,4) RC(6,4) RC(2,5)
-            RC(3,3) RC(3,4) RC(3,5)
+            // Left side
+            RC(0,0) RC(4,0) RC(0,1) RC(4,1) RC(0,2)   // ROW1: S1  S2  S3  S4  S5
+            RC(1,0) RC(5,0) RC(1,1) RC(5,1) RC(1,2)   // ROW2: S6  S7  S8  S9  S10
+            RC(2,0) RC(6,0) RC(2,1) RC(6,1) RC(2,2)   // ROW3: S11 S12 S13 S14 S15
+            RC(3,0) RC(7,0) RC(3,1) RC(7,1) RC(3,2)   // ROW4: S16 S17 S18 S19 S20
+            // Right side
+            RC(0,3) RC(4,3) RC(0,4) RC(4,4) RC(0,5)   // ROW1: S21 S22 S23 S24 S25
+            RC(1,3) RC(5,3) RC(1,4) RC(5,4) RC(1,5)   // ROW2: S26 S27 S28 S29 S30
+            RC(2,3) RC(6,3) RC(2,4) RC(6,4) RC(2,5)   // ROW3: S31 S32 S33 S34 S35
+            RC(3,3) RC(7,3) RC(3,4) RC(7,4) RC(3,5)   // ROW4: S36 S37 S38 S39 S40
         >;
     };
 
@@ -57,17 +53,19 @@
         compatible = "zmk,kscan-gpio-matrix";
         wakeup-source;
         diode-direction = "row2col";
+        // ROW pins are OUTPUTS in row2col — GPIO_ACTIVE_HIGH only, no pull
         row-gpios
-            = <&pro_micro 20 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // ROW1 D20
-            , <&pro_micro 19 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // ROW2 D19
-            , <&pro_micro 18 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // ROW3 D18
-            , <&pro_micro 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // ROW4 D15
+            = <&pro_micro 20 GPIO_ACTIVE_HIGH> // ROW1 D20
+            , <&pro_micro 19 GPIO_ACTIVE_HIGH> // ROW2 D19
+            , <&pro_micro 18 GPIO_ACTIVE_HIGH> // ROW3 D18
+            , <&pro_micro 15 GPIO_ACTIVE_HIGH> // ROW4 D15
             ;
-        // col-gpios added by each side overlay
+        // COL pins are INPUTS in row2col — (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) added by each side overlay
     };
 
     kscan0: kscan_composite {
         compatible = "zmk,kscan-composite";
+        wakeup-source;
         rows = <8>;
         columns = <3>;
 
