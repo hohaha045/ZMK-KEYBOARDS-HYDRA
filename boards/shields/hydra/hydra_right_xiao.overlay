@@ -1,19 +1,10 @@
-#include "hydra.dtsi"
+#include "hydra_xiao.dtsi"
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 
 &default_transform { col-offset = <3>; };
 
-/* ── Matrix: override &pro_micro refs from hydra.dtsi ── */
-/* ROW1-4 → XIAO D0-D3 (P0.02/P0.03/P0.28/P0.29) via adapter */
-/* COL1-3 → XIAO D11-D13 (P0.15/P0.19/P1.01)  via adapter    */
-
+/* ── COL1-3: XIAO Plus D11-D13 (P0.15/P0.19/P1.01) ── */
 &kscan_col2row {
-    row-gpios
-        = <&xiao_d 0 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // ROW1 D0/P0.02
-        , <&xiao_d 1 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // ROW2 D1/P0.03
-        , <&xiao_d 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // ROW3 D2/P0.28
-        , <&xiao_d 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // ROW4 D3/P0.29
-        ;
     col-gpios
         = <&gpio0 15 GPIO_ACTIVE_HIGH>  // COL1 D11/P0.15
         , <&gpio0 19 GPIO_ACTIVE_HIGH>  // COL2 D12/P0.19
@@ -22,12 +13,6 @@
 };
 
 &kscan_row2col {
-    row-gpios
-        = <&xiao_d 0 GPIO_ACTIVE_HIGH>  // ROW1 D0/P0.02
-        , <&xiao_d 1 GPIO_ACTIVE_HIGH>  // ROW2 D1/P0.03
-        , <&xiao_d 2 GPIO_ACTIVE_HIGH>  // ROW3 D2/P0.28
-        , <&xiao_d 3 GPIO_ACTIVE_HIGH>  // ROW4 D3/P0.29
-        ;
     col-gpios
         = <&gpio0 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // COL1 D11/P0.15
         , <&gpio0 19 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // COL2 D12/P0.19
@@ -35,32 +20,14 @@
         ;
 };
 
-/* ── SPI pinctrl: D8=SCK/P1.13, D10=MOSI+MISO/P1.15 (3-wire) ── */
-&pinctrl {
-    spi0_default: spi0_default {
-        group1 {
-            psels = <NRF_PSEL(SPIM_SCK,  1, 13)>,  // D8/P1.13  → JP15 → SENS_SCK
-                    <NRF_PSEL(SPIM_MOSI, 1, 15)>,  // D10/P1.15 → JP16 → SENS_MOSI
-                    <NRF_PSEL(SPIM_MISO, 1, 15)>;  // D10/P1.15 3-wire shared
-            bias-pull-up;
-        };
-    };
-    spi0_sleep: spi0_sleep {
-        group1 {
-            psels = <NRF_PSEL(SPIM_SCK,  1, 13)>,
-                    <NRF_PSEL(SPIM_MOSI, 1, 15)>,
-                    <NRF_PSEL(SPIM_MISO, 1, 15)>;
-            low-power-enable;
-        };
-    };
+/* ── Unlock NFC pins P0.09/P0.10 for OLED CS/DC GPIO ── */
+&uicr {
+    nfct-pins-as-gpios;
 };
 
-&spi0 {
+/* ── SPI PMW3610: board xiao_spi already has pinctrl for D8/D9/D10 ── */
+&xiao_spi {
     status = "okay";
-    compatible = "nordic,nrf-spim";
-    pinctrl-0 = <&spi0_default>;
-    pinctrl-1 = <&spi0_sleep>;
-    pinctrl-names = "default", "sleep";
     cs-gpios = <&xiao_d 7 GPIO_ACTIVE_LOW>;  // D7/P1.12 NCS
 
     trackball: trackball@0 {
