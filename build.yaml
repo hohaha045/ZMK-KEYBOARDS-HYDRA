@@ -28,11 +28,9 @@ include:
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
   # ── XIAO BLE Plus adapter variants ──────────────────────────────────────────
-  # NOTE: Board name may need updating if ZMK adds dedicated Plus support.
-  #       If seeeduino_xiao_ble_plus//zmk exists, prefer it over seeeduino_xiao_ble//zmk.
-  - board: seeeduino_xiao_ble//zmk
+  - board: xiao_ble//zmk
     shield: hydra_left_xiao
-  - board: seeeduino_xiao_ble//zmk
+  - board: xiao_ble//zmk
     shield: hydra_right_xiao
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
