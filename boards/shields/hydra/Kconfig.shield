@@ -3,3 +3,9 @@ config SHIELD_HYDRA_LEFT
 
 config SHIELD_HYDRA_RIGHT
     def_bool $(shields_list_contains,hydra_right)
+
+config SHIELD_HYDRA_LEFT_XIAO
+    def_bool $(shields_list_contains,hydra_left_xiao)
+
+config SHIELD_HYDRA_RIGHT_XIAO
+    def_bool $(shields_list_contains,hydra_right_xiao)
